@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gde/main.dart';
+import 'package:gde/screens/categorie_screen.dart';
 import 'package:gde/screens/home_page.dart';
 import 'package:gde/widgets/mytext.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Nav extends StatefulWidget {
   const Nav({super.key});
@@ -11,6 +13,8 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
+  final supabase = Supabase.instance.client;
+
   int selected = 2;
   final List<Widget> _pges = [
     const Center(
@@ -20,9 +24,7 @@ class _NavState extends State<Nav> {
       child: Text("News"),
     ),
     const HomePage(),
-    const Center(
-      child: Text("Premiere"),
-    ),
+    const CategoryScreen(),
     const Center(
       child: Text("IA"),
     )
@@ -77,7 +79,7 @@ class _NavState extends State<Nav> {
                 const BottomNavigationBarItem(
                     icon: Icon(Icons.home), label: "Accueil"),
                 const BottomNavigationBarItem(
-                    icon: Icon(Icons.category), label: "Catégorie"),
+                    icon: Icon(Icons.category), label: "Catégories"),
                 BottomNavigationBarItem(
                     icon: Image.asset(
                       "assets/icons/Icon IA.png",
