@@ -53,12 +53,10 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            const SizedBox(height: 10),
-            const SizedBox(height: 30),
             Container(
               alignment: Alignment.topLeft,
               child: const Text(
-                "Suggestions",
+                "Suggestions de discussions",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

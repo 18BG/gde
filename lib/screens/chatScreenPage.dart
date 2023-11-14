@@ -13,52 +13,47 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  bool isSpeacking = false;
+  bool isSpeaking = false;
   ScrollController _controller = ScrollController();
-  late FlutterTts text_to_speech;
-  Future _speack(String texte) async {
-    await text_to_speech.setLanguage('en-US');
-    await text_to_speech.setPitch(1.0);
-    await text_to_speech.speak(texte);
+  late FlutterTts textToSpeech;
+  String currentMessage = '';
+
+  Future _speak(String text) async {
+    await textToSpeech.setLanguage('en-US');
+    await textToSpeech.setPitch(1.0);
+    await textToSpeech.speak(text);
   }
 
-  String currentMessage = '';
   Future stop() async {
-    await text_to_speech.stop();
+    await textToSpeech.stop();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _scrollToBottom();
-    text_to_speech = FlutterTts();
+    textToSpeech = FlutterTts();
   }
 
   @override
   Widget build(BuildContext context) {
     final chatModel = Provider.of<ChatModelProvider>(context, listen: false);
+
     if (chatModel.messages.isNotEmpty) {
       currentMessage = chatModel.messages.last.message;
     }
+
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.white,
         title: Row(
           children: [
             GestureDetector(
-              child: const Icon(
-                Icons.close,
-              ),
+              child: const Icon(Icons.close),
               onTap: () async {
-                //_closeSession;
-                // ignore: use_build_context_synchronousl
-                //chatModel.dispose();
                 setState(() {
                   chatModel.messages.clear();
                   chatModel.changeforHome();
-                  print(chatModel.isHome);
                   stop();
                 });
               },
@@ -67,31 +62,29 @@ class _ChatScreenState extends State<ChatScreen> {
             Text("Le Guide"),
             Spacer(),
             IconButton(
-                onPressed: () async {
+              onPressed: () async {
+                await stop();
+                setState(() {
+                  isSpeaking = !isSpeaking;
+                });
+
+                if (isSpeaking) {
+                  _speak(currentMessage).then((value) {
+                    setState(() {
+                      isSpeaking = false;
+                    });
+                  });
+                } else {
                   await stop();
                   setState(() {
-                    isSpeacking = !isSpeacking;
-                    print(isSpeacking);
+                    isSpeaking = false;
                   });
-                  if (isSpeacking) {
-                    _speack(currentMessage).then((value) {
-                      setState(() {
-                        isSpeacking = false;
-                      });
-                    });
-                  } else {
-                    await stop();
-                    setState(() {
-                      isSpeacking = false;
-                    });
-                  }
-                  print(isSpeacking);
-                },
-                icon: const Icon(Icons.volume_up)),
-            SizedBox(
-              width: 10,
+                }
+              },
+              icon: Icon(Icons.volume_up),
             ),
-            Icon(Icons.share)
+            SizedBox(width: 10),
+            Icon(Icons.share),
           ],
         ),
         elevation: 0,
@@ -117,9 +110,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.animateTo(_controller.position.maxScrollExtent,
-          duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _controller.animateTo(
+        _controller.position.maxScrollExtent,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
     });
   }
 }
