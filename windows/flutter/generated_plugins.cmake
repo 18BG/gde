@@ -3,8 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  app_links
-  url_launcher_windows
+  flutter_tts
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

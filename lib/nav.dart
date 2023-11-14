@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gde/main.dart';
-import 'package:gde/screens/categorie_screen.dart';
+import 'package:gde/screens/AIScreen.dart';
 import 'package:gde/screens/home_page.dart';
 import 'package:gde/widgets/mytext.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,10 +24,10 @@ class _NavState extends State<Nav> {
       child: Text("News"),
     ),
     const HomePage(),
-    const CategoryScreen(),
     const Center(
-      child: Text("IA"),
-    )
+      child: Text("Premiere"),
+    ),
+    const StartAIScreen()
   ];
 
   void changeIndex(int value) {
