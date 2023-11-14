@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gde/main.dart';
+import 'package:gde/screens/AIScreen.dart';
 import 'package:gde/screens/home_page.dart';
 import 'package:gde/widgets/mytext.dart';
 
@@ -23,9 +24,7 @@ class _NavState extends State<Nav> {
     const Center(
       child: Text("Premiere"),
     ),
-    const Center(
-      child: Text("IA"),
-    )
+    const StartAIScreen()
   ];
 
   void changeIndex(int value) {
