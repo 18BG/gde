@@ -1,0 +1,16 @@
+--------Informatique
+insert into filiere (nom,  description,  image) values ('Informatique','L''informatique est un domaine d''activité scientifique, technique, et industriel concernant le traitement automatique de l''information numérique par l''exécution de programmes informatiques hébergés par des dispositifs électriques-électroniques : des systèmes embarqués, des ordinateurs, des robots, des automates, etc.',
+'https://fr.wikipedia.org/wiki/Informatique#/media/Fichier:Salle_informatique_de_la_biblioth%C3%A8que_d''Art_et_d''Arch%C3%A9ologie_de_Gen%C3%A8ve.jpg')
+
+
+---Mathematique
+
+insert into filiere (nom,  description,  image) values ('Mathématiques','Les mathématiques (ou la mathématique) sont un ensemble de connaissances abstraites résultant de raisonnements logiques appliqués à des objets divers tels que les ensembles mathématiques, les nombres, les formes, les structures, les transformations, etc. ; ainsi qu''aux relations et opérations mathématiques qui existent entre ces objets. Elles sont aussi le domaine de recherche développant ces connaissances, ainsi que la discipline qui les enseigne.','https://fr.wikipedia.org/wiki/Math%C3%A9matiques#/media/Fichier:CMAP_-_Centre_de_Math%C3%A9matiques_Appliqu%C3%A9es_de_l''Ecole_polytechnique.jpg')
+
+--Physique
+
+insert into filiere (nom,  description,  image) values ('Physique','La physique est la science qui essaie de comprendre, de modéliser et d''expliquer les phénomènes naturels de l''Univers. Elle correspond à l''étude du monde qui nous entoure sous toutes ses formes, des lois de ses variations et de leur évolution.','https://fr.wikipedia.org/wiki/Physique#/media/Fichier:CollageFisica.jpg')
+
+--Chimie 
+
+insert into filiere (nom,  description,  image) values ('Chimie','La chimie est une science de la nature qui étudie la matière et ses transformations, et plus précisément les atomes, les molécules, les réactions chimiques et les forces qui favorisent les réactions chimiques','https://fr.wikipedia.org/wiki/Chimie#/media/Fichier:Chemicals_in_flasks.jpg')
