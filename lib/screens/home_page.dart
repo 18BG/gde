@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gde/models/pub_model.dart';
+import 'package:gde/services/get.dart';
+import 'package:gde/widgets/mytext.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:gde/widgets/mytext.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

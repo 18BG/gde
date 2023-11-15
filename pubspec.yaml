@@ -39,8 +39,10 @@ dependencies:
   provider: ^6.1.1
   flutter_icons_null_safety: ^1.1.0
   flutter_tts: ^3.8.3
+  supabase_flutter: ^1.10.25
   share: ^2.0.4
   supabase_flutter: ^1.10.25
+
 
 dev_dependencies:
   flutter_test:
