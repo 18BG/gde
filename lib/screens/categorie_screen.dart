@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gde/models/filiere.dart';
+import 'package:gde/screens/detail_page.dart';
 import 'package:gde/services/data_provider.dart';
 import 'package:gde/widgets/custom_textfield.dart';
 import 'package:gde/widgets/mytext.dart';
@@ -33,75 +35,75 @@ class _CategoryState extends State<CategoryScreen> {
       builder: (context, value, child) {
         var filiere = value.field;
         print(filiere[0].image);
-        return SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(),
-                  child: MyFields(
-                    hint: "Recherche",
-                    icon: Icons.search,
-                    border: true,
-                    prefix: true,
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(),
+                    child: MyFields(
+                      hint: "Recherche",
+                      icon: Icons.search,
+                      border: true,
+                      prefix: true,
+                    ),
                   ),
-                ),
-                const BoxComponents3(
-                    isLink: false,
-                    color: Colors.blueGrey,
-                    name0: 'USTTB',
-                    image0: "assets/images/Usttb.png",
-                    name1: 'ULSHB',
-                    image1: "assets/images/photo_cak1.gif",
-                    title: "Universités"),
-                const SizedBox(
-                  height: 8,
-                ),
-                const BoxComponents3(
-                    isLink: false,
-                    color: Colors.teal,
-                    name0: 'Centre Aoua Keita',
-                    image0: "assets/images/photo_cak1.gif",
-                    name1: 'CEFTI',
-                    image1: "assets/images/cefti.png",
-                    title: "Centre de formation"),
-                const SizedBox(
-                  height: 8,
-                ),
-                const BoxComponents3(
-                    isLink: false,
-                    color: Colors.teal,
-                    name0: 'IPSMART',
-                    image0: "assets/images/ipsmart.png",
-                    name1: 'INTEC-SUP',
-                    image1: "assets/images/intecsup.png",
-                    title: 'Institut'),
-                const SizedBox(
-                  height: 8,
-                ),
-                BoxComponents3(
-                    isLink: true,
-                    color: Colors.teal,
-                    name0: filiere[0].nom,
-                    image0: filiere[0].image!,
-                    name1: filiere[1].nom,
-                    image1: filiere[1].image!,
-                    title: 'Filieres'),
-                const SizedBox(
-                  height: 8,
-                ),
-                BoxComponents3(
-                    isLink: true,
-                    color: Colors.teal,
-                    name0: filiere[0].nom,
-                    image0: filiere[0].image!,
-                    name1: filiere[1].nom,
-                    image1: filiere[1].image!,
-                    title: 'Filieres'),
-              ],
+                  BoxComponents3(
+                      c: context,
+                      filiere: [],
+                      isLink: false,
+                      color: Colors.blueGrey,
+                      name0: 'USTTB',
+                      image0: "assets/images/Usttb.png",
+                      name1: 'ULSHB',
+                      image1: "assets/images/photo_cak1.gif",
+                      title: "Universités"),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  BoxComponents3(
+                      c: context,
+                      isLink: false,
+                      color: Colors.blueGrey,
+                      name0: 'Centre Aoua Keita',
+                      image0: "assets/images/photo_cak1.gif",
+                      name1: 'CEFTI',
+                      image1: "assets/images/cefti.png",
+                      title: "Centre de formation"),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  BoxComponents3(
+                      c: context,
+                      isLink: false,
+                      color: Colors.blueGrey,
+                      name0: 'IPSMART',
+                      image0: "assets/images/ipsmart.png",
+                      name1: 'INTEC-SUP',
+                      image1: "assets/images/intecsup.png",
+                      title: 'Institut'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  BoxComponents3(
+                      c: context,
+                      filiere: value.field,
+                      isLink: true,
+                      color: Colors.blueGrey,
+                      name0: filiere[0].nom,
+                      image0: filiere[0].image!,
+                      name1: filiere[1].nom,
+                      image1: filiere[1].image!,
+                      title: 'Filieres'),
+                ],
+              ),
             ),
           ),
         );
@@ -110,83 +112,17 @@ class _CategoryState extends State<CategoryScreen> {
   }
 }
 
-// class BoxComponents extends StatefulWidget {
-//   final String name0;
-//   final String image0;
-//   final String name1;
-//   final String image1;
-//   final String title;
-//   final bool isLink;
-//   void Function()? onPressed;
-//   Color color;
-//   BoxComponents(
-//       {super.key,
-//       this.onPressed,
-//       required this.isLink,
-//       required this.color,
-//       required this.name0,
-//       required this.image0,
-//       required this.name1,
-//       required this.image1,
-//       required this.title});
-
-//   @override
-//   State<BoxComponents> createState() => _BoxComponentsState();
-// }
-
-// class _BoxComponentsState extends State<BoxComponents> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.all(5),
-//       decoration: BoxDecoration(
-//           color: widget.color,
-//           borderRadius: const BorderRadius.only(
-//               topRight: Radius.elliptical(30, 20),
-//               bottomLeft: Radius.elliptical(20, 30))),
-//       child: Column(
-//         children: [
-//           CText(
-//             widget.title,
-//             size: 19,
-//             weight: FontWeight.w500,
-//           ),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: [
-//               UBoxe(
-//                 isLink: widget.isLink,
-//                 name: widget.name0,
-//                 image: widget.image0,
-//               ),
-//               UBoxe(
-//                 isLink: widget.isLink,
-//                 name: widget.name1,
-//                 image: widget.image1,
-//               ),
-//               IconButton(
-//                   onPressed: () {},
-//                   icon: const Icon(
-//                     Icons.arrow_drop_down,
-//                     size: 40,
-//                   ))
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class UBoxe extends StatelessWidget {
   final String name;
   final String image;
   final bool isLink;
+  final bool isIn;
   const UBoxe(
       {super.key,
       required this.name,
       required this.isLink,
-      required this.image});
+      required this.image,
+      required this.isIn});
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +133,7 @@ class UBoxe extends StatelessWidget {
 
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: hi / 3,
           width: wi / 2.5,
           child: ClipRRect(
@@ -213,11 +149,11 @@ class UBoxe extends StatelessWidget {
                     )),
         ),
         const SizedBox(
-          height: 5,
+          height: 4,
         ),
         CText(
           name,
-          size: 18,
+          size: 19,
           color: Colors.white,
         )
       ],
@@ -233,10 +169,14 @@ class BoxComponents3 extends StatefulWidget {
   final String title;
   final bool isLink;
   final Color color;
+  final BuildContext c;
+  final List<Filiere>? filiere;
 
   const BoxComponents3({
     Key? key,
     required this.isLink,
+    required this.c,
+    this.filiere,
     required this.color,
     required this.name0,
     required this.image0,
@@ -286,10 +226,16 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                       isExpanded = !isExpanded;
                     });
                   },
-                  icon: const Icon(
-                    Icons.arrow_drop_down,
-                    size: 40,
-                  ))
+                  icon: isExpanded
+                      ? const Icon(
+                          Icons.arrow_drop_up,
+                          size: 40,
+                          color: Colors.green,
+                        )
+                      : const Icon(
+                          Icons.arrow_drop_down,
+                          size: 40,
+                        ))
             ],
           ),
           AnimatedCrossFade(
@@ -299,11 +245,13 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   UBoxe(
+                    isIn: false,
                     isLink: widget.isLink,
                     name: widget.name0,
                     image: widget.image0,
                   ),
                   UBoxe(
+                    isIn: false,
                     isLink: widget.isLink,
                     name: widget.name1,
                     image: widget.image1,
@@ -311,26 +259,56 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                 ],
               ),
             ),
-            secondChild: Container(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  UBoxe(
-                    isLink: widget.isLink,
-                    name: widget.name0,
-                    image: widget.image0,
+            secondChild: (widget.filiere != null)
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(
+                        parent: NeverScrollableScrollPhysics()),
+                    itemCount: widget.filiere!.length,
+                    itemBuilder: (context, i) {
+                      var fi = widget.filiere![i];
+
+                      return Container(
+                        padding: const EdgeInsets.all(2.0),
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => DetailPage(filiere: fi));
+                          },
+                          child: UBoxe(
+                            isIn: true,
+                            isLink: true,
+                            name: fi.nom,
+                            image: fi.image!,
+                          ),
+                        ),
+                      );
+                    })
+                : Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        UBoxe(
+                          isIn: true,
+                          isLink: widget.isLink,
+                          name: widget.name0,
+                          image: widget.image0,
+                        ),
+                        UBoxe(
+                          isIn: true,
+                          isLink: widget.isLink,
+                          name: widget.name1,
+                          image: widget.image1,
+                        ),
+                        // Ajoutez ici les éléments supplémentaires à afficher
+                        // lorsque le panneau est déplié.
+                        // Par exemple, vous pouvez ajouter d'autres UBoxe.
+                      ],
+                    ),
                   ),
-                  UBoxe(
-                    isLink: widget.isLink,
-                    name: widget.name1,
-                    image: widget.image1,
-                  ),
-                  // Ajoutez ici les éléments supplémentaires à afficher
-                  // lorsque le panneau est déplié.
-                  // Par exemple, vous pouvez ajouter d'autres UBoxe.
-                ],
-              ),
-            ),
             crossFadeState: isExpanded
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
@@ -339,4 +317,24 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
       ),
     );
   }
+  // Container(
+  //             width: MediaQuery.of(context).size.width,
+  //             child: Column(
+  //               children: [
+  //                 UBoxe(
+  //                   isLink: widget.isLink,
+  //                   name: widget.name0,
+  //                   image: widget.image0,
+  //                 ),
+  //                 UBoxe(
+  //                   isLink: widget.isLink,
+  //                   name: widget.name1,
+  //                   image: widget.image1,
+  //                 ),
+  //                 // Ajoutez ici les éléments supplémentaires à afficher
+  //                 // lorsque le panneau est déplié.
+  //                 // Par exemple, vous pouvez ajouter d'autres UBoxe.
+  //               ],
+  //             ),
+  //           ),
 }
