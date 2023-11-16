@@ -3,6 +3,7 @@ import 'package:gde/main.dart';
 import 'package:gde/screens/AIScreen.dart';
 import 'package:gde/screens/categorie_screen.dart';
 import 'package:gde/screens/home_page.dart';
+import 'package:gde/screens/info.dart';
 import 'package:gde/screens/newsScreen.dart';
 import 'package:gde/widgets/mytext.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -19,9 +20,7 @@ class _NavState extends State<Nav> {
 
   int selected = 2;
   final List<Widget> _pges = [
-    const Center(
-      child: Text("About"),
-    ),
+    const InfoScreen(),
     NewsScreen(),
     const HomePage(),
     const CategoryScreen(),

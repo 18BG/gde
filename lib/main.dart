@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gde/nav.dart';
+import 'package:gde/services/data_provider.dart';
 import 'package:gde/services/providerUsage.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,7 +15,10 @@ void main() async {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlocnR5eXhieWtkZ3htaWFoendzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk5MDY1MTcsImV4cCI6MjAxNTQ4MjUxN30.SnLCAAJwMK2gELbjE_g2WW92q7RXrO7kkn3n3PSZLCk',
   );
   runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => ChatModelProvider())],
+    providers: [
+      ChangeNotifierProvider(create: (_) => ChatModelProvider()),
+      ChangeNotifierProvider(create: (_) => DataProvider())
+    ],
     child: const MyApp(),
   ));
 }

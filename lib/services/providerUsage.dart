@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:gde/models/chatModel.dart';
+import 'package:gde/models/filiere.dart';
+import 'package:gde/services/supabase_management.dart';
 
 class ChatModelProvider with ChangeNotifier {
   bool isHome = true;
@@ -14,6 +16,7 @@ class ChatModelProvider with ChangeNotifier {
 
   Future<bool> change() async {
     isHome = false;
+
     notifyListeners();
     return isHome;
   }
