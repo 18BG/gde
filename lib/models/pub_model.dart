@@ -1,11 +1,13 @@
 class PubModel {
   String titre;
+  String auteur;
   String image;
-  String description;
+  String contenue;
   String source;
   PubModel(
       {required this.titre,
-      required this.description,
+      required this.auteur,
+      required this.contenue,
       required this.image,
       required this.source});
 
@@ -13,8 +15,9 @@ class PubModel {
     print(json);
     return PubModel(
         titre: json['Titre'],
-        description: "description",
+        contenue: "description",
         image: "image",
-        source: "source");
+        source: "source",
+        auteur: '');
   }
 }
