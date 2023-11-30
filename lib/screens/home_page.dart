@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
 
     super.initState();
 
-    provider = Provider.of<DataProvider>(context, listen: false);
-    provider.getFiliere();
+    // provider = Provider.of<DataProvider>(context, listen: false);
+    // provider.getFiliere();
     super.initState();
   }
 

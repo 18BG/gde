@@ -14,3 +14,67 @@ insert into filiere (nom,  description,  image) values ('Physique','La physique 
 --Chimie 
 
 insert into filiere (nom,  description,  image) values ('Chimie','La chimie est une science de la nature qui étudie la matière et ses transformations, et plus précisément les atomes, les molécules, les réactions chimiques et les forces qui favorisent les réactions chimiques','https://fr.wikipedia.org/wiki/Chimie#/media/Fichier:Chemicals_in_flasks.jpg')
+
+
+
+
+
+
+
+
+---------Insert option--------------------
+
+
+
+insert into option(filiere_id,denomination, description,image) values (1,'Réseaux et Sécurité Informatique','Les réseaux informatiques sont des systèmes qui permettent à des ordinateurs de communiquer entre eux, du simple partage de fichiers sur un réseau local à la connexion à l''Internet mondial.
+
+La sécurité informatique se concentre sur la protection de ces systèmes contre les menaces telles que les virus, les attaques en ligne et les logiciels malveillants. Elle vise à garantir la confidentialité, l''intégrité et la disponibilité des données.
+
+Opter pour un parcours universitaire dans ce domaine implique d''apprendre à concevoir, gérer et sécuriser des réseaux, ainsi que de comprendre les stratégies pour protéger les informations numériques contre les cybermenaces. C''est un domaine en constante évolution, crucial dans notre ère numérique.','https://www.computerland.fr/wp-content/uploads/2020/10/securite-reseau-informatique.jpg'),
+
+ (1,'Intelligence Artificielle et Apprentissage Automatique','L''intelligence artificielle (IA) concerne la création de systèmes informatiques capables de réaliser des tâches qui normalement nécessitent une intelligence humaine. Cela inclut des domaines tels que la reconnaissance vocale, la vision par ordinateur et la prise de décision automatisée.
+
+L''apprentissage automatique (Machine Learning) est une sous-discipline de l''IA où les systèmes informatiques apprennent à partir de données, sans être explicitement programmés. Ils identifient des modèles et améliorent leur performance au fil du temps.
+
+Opter pour un parcours universitaire en intelligence artificielle et apprentissage automatique implique l''étude des algorithmes, des modèles et des techniques qui permettent à une machine d''apprendre et de résoudre des problèmes de manière autonome. C''est un domaine en plein essor qui trouve des applications dans divers secteurs tels que la santé, la finance, et les technologies de l''information. Cela demande une compréhension approfondie des mathématiques, des statistiques et de la programmation.','https://www.spiria.com/site/assets/files/4309/banner-zak.1200x630.jpg'),
+
+ (1,'Développeur','Le rôle d''un développeur implique la création de logiciels, d''applications ou de systèmes informatiques en écrivant du code informatique. Les développeurs peuvent se spécialiser dans divers domaines tels que le développement web, mobile, logiciel, embarqué, etc.
+
+Opter pour un parcours universitaire en développement informatique signifie acquérir des compétences en programmation, en résolution de problèmes et en conception logicielle. Les développeurs utilisent souvent plusieurs langages de programmation pour créer des solutions informatiques fonctionnelles. C''est un domaine dynamique où la créativité et l''innovation sont essentielles pour résoudre des défis complexes.
+
+Les parcours en développement informatique couvrent généralement une gamme de langages de programmation, de concepts de base du génie logiciel, et peuvent inclure des domaines spécifiques tels que le développement web, le développement mobile, ou le développement d''applications spécifiques. C''est un domaine où la demande de compétences est élevée dans de nombreux secteurs, de l''industrie technologique aux services financiers, en passant par la santé.'),
+
+ (1,'Réseaux et Télécommunications','Les réseaux et les télécommunications concernent la mise en place et la gestion des systèmes qui permettent aux appareils de communiquer entre eux (réseaux) et la transmission à distance de l''information (télécommunications). Un parcours dans ce domaine implique l''apprentissage de la conception, de la gestion et de la sécurité des réseaux, ainsi que des technologies de communication modernes. C''est un domaine clé pour la connectivité et la communication dans le monde numérique.','https://www.acefgp.ca/admin/useruploads/photo/telecommunication.jpg'),
+
+ (2,'Statistiques et Analyse de Données','Statistiques et Analyse de Données sont des domaines cruciaux dans le traitement de l''information.
+
+Les statistiques englobent les méthodes pour collecter, analyser et interpréter des données. Elles permettent de tirer des conclusions significatives à partir d''échantillons de données, d''évaluer la fiabilité des résultats et de prendre des décisions éclairées.
+
+L''analyse de données implique l''utilisation d''outils informatiques pour examiner, nettoyer et interpréter des ensembles de données. Elle comprend des techniques telles que l''apprentissage automatique, la modélisation statistique et la visualisation de données pour identifier des tendances, des modèles ou des informations utiles.
+
+Un parcours universitaire dans ces domaines inclut généralement l''apprentissage des méthodes statistiques, des outils d''analyse de données et des compétences en programmation. Ces compétences sont largement utilisées dans des secteurs tels que la finance, la santé, le marketing et la recherche scientifique pour prendre des décisions informées basées sur des données fiables.','https://img.freepik.com/vecteurs-premium/tableau-bord-analyse-donnees_165488-4551.jpg?w=2000'),
+
+ (2,'Actuariat','L''actuariat est une discipline qui se concentre sur l''évaluation et la gestion des risques financiers à l''aide de modèles mathématiques et statistiques. Les actuaires sont des professionnels qui travaillent principalement dans les domaines de l''assurance, de la finance et de la gestion des pensions.
+
+Un parcours universitaire en actuariat implique l''apprentissage des théories statistiques, des modèles financiers et des méthodes mathématiques pour évaluer les risques et prendre des décisions éclairées en matière de tarification des assurances, de gestion des fonds de pension et d''autres domaines financiers. Les actuaires jouent un rôle crucial dans la prise de décisions stratégiques basées sur des analyses approfondies des données et des risques financiers.','https://regardfinancier.files.wordpress.com/2019/07/actuaire-cameroun.jpg?w=381&h=305&crop=1'),
+
+ (2,'Mathématiques Appliquées','Les mathématiques appliquées sont une discipline qui vise à résoudre des problèmes concrets en utilisant des concepts et des méthodes mathématiques. Ce domaine s''applique à de nombreux secteurs tels que la science, l''ingénierie, l''économie, la biologie et d''autres domaines scientifiques et technologiques.
+
+Un parcours universitaire en mathématiques appliquées comprend l''étude de diverses branches des mathématiques, telles que l''analyse, l''algèbre, la statistique, et leur application pratique. Les professionnels formés en mathématiques appliquées sont souvent sollicités pour résoudre des problèmes du monde réel en développant des modèles mathématiques, en effectuant des simulations numériques et en fournissant des solutions basées sur une compréhension approfondie des concepts mathématiques.
+
+En résumé, les mathématiques appliquées combinent la théorie mathématique avec des applications concrètes pour résoudre des problèmes pratiques dans divers domaines. C''est un domaine versatile qui offre des compétences recherchées dans de nombreux secteurs professionnels.','https://www.cidj.com/sites/default/files/2018-10/licence-mass.jpg'),
+
+ (3,'Astrophysique','L''astrophysique est une branche de l''astronomie qui applique les principes de la physique pour comprendre les propriétés et le comportement des objets célestes dans l''univers. Elle explore les structures, les processus et les phénomènes qui se produisent à l''échelle cosmique.
+
+Un parcours universitaire en astrophysique implique l''étude des lois fondamentales de la physique, telles que la mécanique, la thermodynamique, l''électromagnétisme, et leur application à des objets célestes tels que les étoiles, les galaxies, les trous noirs, et autres. Les astrophysiciens utilisent des observations, des modèles et des simulations pour comprendre l''origine et l''évolution de l''univers.
+
+En résumé, l''astrophysique combine les principes de la physique avec l''observation astronomique pour étudier les mystères de l''univers, de la formation des étoiles à la compréhension de la nature de l''espace-temps. C''est un domaine passionnant pour ceux qui sont fascinés par la compréhension profonde de notre cosmos.','https://cdn.futura-sciences.com/sources/images/actu/champs-magnetiques-astrophysiques.jpeg'),
+
+ (3,'Physique Nucléaire','La physique nucléaire se concentre sur l''étude des propriétés et du comportement des noyaux atomiques, ainsi que des interactions nucléaires à l''échelle subatomique. Cela englobe la structure nucléaire, les réactions nucléaires, et les applications dans des domaines tels que l''énergie nucléaire et la médecine, notamment l''imagerie médicale. Un parcours en physique nucléaire implique l''exploration des lois fondamentales de la physique, des concepts liés aux particules subatomiques, et offre une compréhension approfondie de la nature de la matière au niveau atomique.','https://www.montraykreyol.org/sites/default/files/styles/medium/public/physique_nucl.png?itok=LM1xbySA'),
+
+ (3,'Ingénierie Physique','L''ingénierie physique est une discipline qui applique les principes fondamentaux de la physique à la conception, au développement et à l''optimisation de technologies et de systèmes innovants. Ce domaine englobe la mécanique, l''électromagnétisme, l''optique, l''acoustique, et d''autres aspects de la physique pour résoudre des problèmes d''ingénierie concrets. Un parcours en ingénierie physique implique l''apprentissage des principes scientifiques et des techniques d''ingénierie pour concevoir des solutions technologiques dans divers domaines, tels que l''électronique, l''énergie, les matériaux, et la santé. C''est un domaine qui favorise une approche multidisciplinaire pour innover dans le développement de nouvelles technologies.','https://i0.wp.com/www.cfa-univ.fr/wp-content/uploads/2023/10/Industrie-scaled.jpeg?fit=2560%2C1707&ssl=1'),
+ 
+ (4,'Chimie Analytique','La chimie analytique est une branche de la chimie qui se concentre sur les méthodes et les techniques permettant d''analyser la composition des substances chimiques. Elle vise à identifier et à quantifier les composants d''un échantillon, ainsi qu''à comprendre les processus chimiques qui s''y déroulent. Un parcours en chimie analytique implique l''apprentissage des méthodes de mesure, des instruments analytiques, et des techniques de séparation pour résoudre des problèmes analytiques. Cette discipline est cruciale dans de nombreux domaines, tels que la recherche pharmaceutique, l''industrie alimentaire, la protection de l''environnement, et d''autres secteurs où la connaissance précise de la composition chimique est essentielle.','https://www.univ-msila.dz/crafe/wp-content/uploads/2022/02/17015754_10154344123311551_7818292163571796783_o-660x330.jpg'),
+ (4,'Chimie Organique','La chimie organique est une branche de la chimie qui se focalise sur l''étude des composés organiques, principalement basés sur le carbone, l''hydrogène, et d''autres éléments comme l''azote, l''oxygène, le soufre, etc. Elle examine la structure, les propriétés et les réactions de ces composés. Un parcours en chimie organique implique l''apprentissage des mécanismes réactionnels, des synthèses de composés organiques, et des applications pratiques dans la fabrication de médicaments, de polymères, et d''autres produits chimiques. C''est une discipline fondamentale pour de nombreuses industries, y compris la pharmacie, la chimie fine, et la recherche en matériaux.','https://teleensm.ummto.dz/pluginfile.php/18941/course/overviewfiles/1_5VZXn9cXJUchot7u_MrIwA.png'),
+
+ (4,'Chimie des Matériaux','La chimie des matériaux est une branche de la chimie qui se concentre sur la conception, la synthèse et l''étude des propriétés des matériaux. Elle vise à comprendre la relation entre la structure chimique et les caractéristiques physiques des matériaux. Un parcours en chimie des matériaux implique l''apprentissage des méthodes de synthèse, de la caractérisation des matériaux, et de la manipulation des propriétés pour des applications spécifiques. Cette discipline est cruciale dans le développement de nouveaux matériaux pour des domaines tels que l''électronique, la médecine, l''énergie, et d''autres industries où la performance des matériaux est essentielle.','https://storage.letudiant.fr/mediatheque/letudiant/9/3/2461493-adobestock-190016737-766x438.jpeg'),

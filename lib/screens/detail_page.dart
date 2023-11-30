@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gde/models/filiere.dart';
+import 'package:gde/screens/filiere_info_screen.dart';
 import 'package:gde/widgets/mytext.dart';
 
 class DetailPage extends StatefulWidget {
@@ -13,10 +15,10 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height - 100,
+    return SizedBox(
+      //height: MediaQuery.of(context).size.height - 100,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -43,11 +45,37 @@ class _DetailPageState extends State<DetailPage> {
                         widget.filiere.description,
                         size: 18,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CText("Débouché"),
-                      CText(widget.filiere.description)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25, bottom: 10),
+                        child: RichText(
+                          text: TextSpan(
+                              text: "Pour plus d'information cette filiere ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                              children: [
+                                TextSpan(
+                                    text: "cliquer ici",
+                                    style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.pop(context);
+                                        print("Tapedd");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FiliereInfo(
+                                                      filiere: widget.filiere,
+                                                    )));
+                                      })
+                              ]),
+                        ),
+                      )
                     ],
                   )),
             ],
