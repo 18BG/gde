@@ -21,8 +21,8 @@ class _CategoryState extends State<CategoryScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    provider = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      provider = Provider.of<DataProvider>(context, listen: false);
       if (provider.field.isEmpty) {
         provider.getFiliere();
       }
@@ -34,8 +34,9 @@ class _CategoryState extends State<CategoryScreen> {
     return Consumer<DataProvider>(
       builder: (context, value, child) {
         var filiere = value.field;
-        print(filiere[0].image);
+
         return Scaffold(
+          //backgroundColor: Colors.black87,
           body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.all(10),
@@ -52,56 +53,79 @@ class _CategoryState extends State<CategoryScreen> {
                       prefix: true,
                     ),
                   ),
-                  BoxComponents3(
-                      c: context,
-                      filiere: [],
-                      isLink: false,
-                      color: Colors.blueGrey,
-                      name0: 'USTTB',
-                      image0: "assets/images/Usttb.png",
-                      name1: 'ULSHB',
-                      image1: "assets/images/photo_cak1.gif",
-                      title: "Universités"),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  BoxComponents3(
-                      c: context,
-                      isLink: false,
-                      color: Colors.blueGrey,
-                      name0: 'Centre Aoua Keita',
-                      image0: "assets/images/photo_cak1.gif",
-                      name1: 'CEFTI',
-                      image1: "assets/images/cefti.png",
-                      title: "Centre de formation"),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  BoxComponents3(
-                      c: context,
-                      isLink: false,
-                      color: Colors.blueGrey,
-                      name0: 'IPSMART',
-                      image0: "assets/images/ipsmart.png",
-                      name1: 'INTEC-SUP',
-                      image1: "assets/images/intecsup.png",
-                      title: 'Institut'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  BoxComponents3(
-                      c: context,
-                      filiere: value.field,
-                      isLink: true,
-                      color: Colors.blueGrey,
-                      name0: filiere[0].nom,
-                      image0: filiere[0].image!,
-                      name1: filiere[1].nom,
-                      image1: filiere[1].image!,
-                      title: 'Filieres'),
+                  FutureBuilder(
+                    future: provider.getFiliere(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Center(child: CText("Erreur"));
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Column(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CircularProgressIndicator(),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            BoxComponents3(
+                                c: context,
+                                filiere: [],
+                                isLink: false,
+                                color: Colors.blueGrey,
+                                name0: 'USTTB',
+                                image0: "assets/images/Usttb.png",
+                                name1: 'ULSHB',
+                                image1: "assets/images/photo_cak1.gif",
+                                title: "Universités"),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            BoxComponents3(
+                                c: context,
+                                isLink: false,
+                                color: Colors.blueGrey,
+                                name0: 'Centre Aoua Keita',
+                                image0: "assets/images/photo_cak1.gif",
+                                name1: 'CEFTI',
+                                image1: "assets/images/cefti.png",
+                                title: "Centre de formation"),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            BoxComponents3(
+                                c: context,
+                                isLink: false,
+                                color: Colors.blueGrey,
+                                name0: 'IPSMART',
+                                image0: "assets/images/ipsmart.png",
+                                name1: 'INTEC-SUP',
+                                image1: "assets/images/intecsup.png",
+                                title: 'Institut'),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            BoxComponents3(
+                                c: context,
+                                filiere: value.field,
+                                isLink: true,
+                                color: Colors.blueGrey,
+                                name0: filiere[0].nom,
+                                image0: filiere[0].image!,
+                                name1: filiere[1].nom,
+                                image1: filiere[1].image!,
+                                title: 'Filieres'),
+                          ],
+                        );
+                      }
+                    },
+                  )
                 ],
               ),
             ),
@@ -117,12 +141,14 @@ class UBoxe extends StatelessWidget {
   final String image;
   final bool isLink;
   final bool isIn;
+  final bool big;
   const UBoxe(
       {super.key,
       required this.name,
       required this.isLink,
       required this.image,
-      required this.isIn});
+      required this.isIn,
+      required this.big});
 
   @override
   Widget build(BuildContext context) {
@@ -130,23 +156,29 @@ class UBoxe extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double wi = width - 50;
     double hi = height / 3.5;
+    double bi_wi = width / 1.5;
+    double big_hi = height / 4.7;
 
     return Column(
       children: [
         SizedBox(
-          height: hi / 3,
-          width: wi / 2.5,
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: !isLink
-                  ? Image.asset(
-                      image,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.network(
-                      image,
-                      fit: BoxFit.cover,
-                    )),
+          height: big ? big_hi : hi / 3,
+          width: big ? bi_wi : wi / 2.5,
+          child: Card(
+            elevation: 5,
+            shadowColor: Colors.black,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: !isLink
+                    ? Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                      )),
+          ),
         ),
         const SizedBox(
           height: 4,
@@ -190,14 +222,26 @@ class BoxComponents3 extends StatefulWidget {
 }
 
 class _BoxComponentsState3 extends State<BoxComponents3> {
+  bool isLastPage = false;
   bool isExpanded = false;
+
+  late PageController _pageController;
+  late int currentPage;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController();
+    currentPage = _pageController.initialPage;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: widget.color,
+        //color: widget.color,
+        color: Colors.blueGrey[300],
         borderRadius: const BorderRadius.only(
           topRight: Radius.elliptical(30, 20),
           bottomLeft: Radius.elliptical(20, 30),
@@ -246,11 +290,13 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                 children: [
                   UBoxe(
                     isIn: false,
+                    big: false,
                     isLink: widget.isLink,
                     name: widget.name0,
                     image: widget.image0,
                   ),
                   UBoxe(
+                    big: false,
                     isIn: false,
                     isLink: widget.isLink,
                     name: widget.name1,
@@ -260,44 +306,108 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
               ),
             ),
             secondChild: (widget.filiere != null)
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(
-                        parent: NeverScrollableScrollPhysics()),
-                    itemCount: widget.filiere!.length,
-                    itemBuilder: (context, i) {
-                      var fi = widget.filiere![i];
+                ? Stack(
+                    children: [
+                      Container(
+                        height: 630,
+                        child: PageView.builder(
+                            onPageChanged: (value) {
+                              setState(() {
+                                currentPage = value;
+                              });
+                            },
+                            controller: _pageController,
+                            itemCount: (widget.filiere!.length / 2).ceil(),
+                            itemBuilder: (context, i) {
+                              var fi = widget.filiere![i];
+                              int startIndex = i * 2;
+                              int endIndex = (i + 1) * 2;
+                              endIndex = endIndex > widget.filiere!.length
+                                  ? widget.filiere!.length
+                                  : endIndex;
 
-                      return Container(
-                        padding: const EdgeInsets.all(2.0),
-                        margin: const EdgeInsets.only(bottom: 5),
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) => DetailPage(filiere: fi));
+                              List<Filiere> currentPageUniversities =
+                                  widget.filiere!.sublist(startIndex, endIndex);
+
+                              return Column(children: [
+                                for (var fil in currentPageUniversities)
+                                  Container(
+                                    padding: const EdgeInsets.all(2.0),
+                                    margin: const EdgeInsets.only(bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            builder: (context) =>
+                                                DetailPage(filiere: fil));
+                                      },
+                                      child: UBoxe(
+                                        big: true,
+                                        isIn: true,
+                                        isLink: true,
+                                        name: fil.nom,
+                                        image: fil.image!,
+                                      ),
+                                    ),
+                                  ),
+                              ]);
+                            }),
+                      ),
+                      Positioned(
+                        top: 0.0,
+                        bottom: 0.0,
+                        right: 0.0,
+                        child: IconButton(
+                          color: currentPage <
+                                  (widget.filiere!.length / 2).ceil() - 1
+                              ? Colors.white
+                              : Colors.black.withOpacity(0.5),
+                          icon: Icon(Icons.chevron_right, size: 50),
+                          onPressed: () {
+                            if (_pageController.page! <
+                                (widget.filiere!.length / 2).ceil() - 1) {
+                              _pageController.nextPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut);
+                            }
                           },
-                          child: UBoxe(
-                            isIn: true,
-                            isLink: true,
-                            name: fi.nom,
-                            image: fi.image!,
-                          ),
                         ),
-                      );
-                    })
+                      ),
+                      Positioned(
+                        top: 0.0,
+                        bottom: 0.0,
+                        left: 0.0,
+                        child: IconButton(
+                          color: currentPage == 0
+                              ? Colors.black.withOpacity(0.5)
+                              : Colors.white,
+                          icon: Icon(Icons.chevron_left, size: 50),
+                          onPressed: () {
+                            print(_pageController.page!);
+                            if (_pageController.page! > 0) {
+                              _pageController.previousPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut);
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  )
                 : Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
                         UBoxe(
+                          big: true,
                           isIn: true,
                           isLink: widget.isLink,
                           name: widget.name0,
                           image: widget.image0,
                         ),
                         UBoxe(
+                          big: true,
                           isIn: true,
                           isLink: widget.isLink,
                           name: widget.name1,
