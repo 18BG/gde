@@ -135,26 +135,25 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class PublicationWidget extends StatelessWidget {
-  PublicationWidget({
-    Key? key,
-    required this.imagesrc,
-    required this.description,
-    required this.username,
-    required this.structureName,
-    this.listimage,
-  }) : super(key: key);
+import 'package:gde/models/publication_model.dart';
+import 'package:gde/widgets/mytext.dart';
 
-  final String imagesrc;
-  final String description;
-  final String structureName;
+class PublicationWidget extends StatelessWidget {
+  PublicationWidget(
+      {Key? key,
+      required this.username,
+      this.listimage,
+      required this.publication})
+      : super(key: key);
+
   final String username;
   final List<String>? listimage;
+  final Publication publication;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
@@ -162,7 +161,7 @@ class PublicationWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -180,47 +179,58 @@ class PublicationWidget extends StatelessWidget {
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    imagesrc,
+                    publication.structure!.logo,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    structureName,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      publication.structure!.nom,
+                      style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 2,
                     ),
-                  ),
-                  Text(
-                    username,
-                    style: TextStyle(
-                      color: Colors.grey,
+                    Text(
+                      publication.date,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                      ),
                     ),
-                  ),
-                ],
+                    CText(
+                      username,
+                      color: Colors.grey[800],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
-            description,
-            style: TextStyle(
+            publication.description,
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           listimage != null ? _buildImageGrid(context) : Container(),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildButton("Like", Icons.thumb_up),
+              // _buildButton("Like", Icons.thumb_up),
               _buildButton("Comment", Icons.comment),
+              const SizedBox(
+                width: 15,
+              ),
               _buildButton("Share", Icons.share),
             ],
           ),
@@ -233,10 +243,10 @@ class PublicationWidget extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: Colors.grey),
-        SizedBox(width: 4),
+        const SizedBox(width: 4),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
           ),
         ),
@@ -247,7 +257,7 @@ class PublicationWidget extends StatelessWidget {
   Widget _buildImageGrid(BuildContext context) {
     if (listimage != null && listimage!.isNotEmpty) {
       return Wrap(
-        spacing: 8.0,
+        spacing: 6.0,
         runSpacing: 8.0,
         children: listimage!.map((imageUrl) {
           return ClipRRect(
@@ -255,9 +265,9 @@ class PublicationWidget extends StatelessWidget {
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
-              width: (MediaQuery.of(context).size.width - 40) /
+              width: (MediaQuery.of(context).size.width - 45) /
                   min(listimage!.length, 3),
-              height: (MediaQuery.of(context).size.width - 40) /
+              height: (MediaQuery.of(context).size.width - 45) /
                   min(listimage!.length, 3),
             ),
           );

@@ -1,8 +1,53 @@
+import 'package:gde/models/Structure.dart';
 import 'package:gde/utilities/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseManager {
   var _db = Supabase.instance.client;
+
+  Future<dynamic> getStructure() async {
+    var data;
+    try {
+      data = await _db.from("structure").select("*");
+      print("----");
+    } catch (e) {
+      print(e);
+    }
+    return data;
+  }
+
+  Future<dynamic> getPublication() async {
+    var data;
+    try {
+      data = await _db.from("publication").select("*");
+      print("----");
+    } catch (e) {
+      print(e);
+    }
+    return data;
+  }
+
+  Future<dynamic> getPubImage() async {
+    var data;
+    try {
+      data = await _db.from("image").select("*");
+      print("----");
+    } catch (e) {
+      print(e);
+    }
+    return data;
+  }
+
+  Future<dynamic> getFiliereStructure() async {
+    var data;
+    try {
+      data = await _db.from("filiere_structure").select("*");
+      print("----");
+    } catch (e) {
+      print(e);
+    }
+    return data;
+  }
 
   Future<dynamic> getFiliere() async {
     print("-----------");

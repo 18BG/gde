@@ -16,11 +16,13 @@ class FiliereInfo extends StatefulWidget {
 
 class _FiliereInfoState extends State<FiliereInfo> {
   late DataProvider provider;
+  bool onOption = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     provider = Provider.of<DataProvider>(context, listen: false);
+
     if (provider.option_liste.isEmpty) {
       provider.getOption();
     }
@@ -32,13 +34,34 @@ class _FiliereInfoState extends State<FiliereInfo> {
       builder: (context, value, child) {
         print(value.option_liste.length);
         var thisOptiont = [];
+        var thStructure = [];
+        var filier = widget.filiere;
+        print("current ${widget.filiere.id}");
+        for (var o in value.fil_struc_list) {
+          print("${o.filiere_id}  ${o.structure_id}");
+        }
+        for (var i in value.fil_struc_list) {
+          if (widget.filiere.id == i.filiere_id) {
+            for (var str in value.liste_structure) {
+              if (str.structure_id == i.structure_id) {
+                thStructure.add(str);
+              }
+            }
+          }
+
+          print("Les str --- ${thStructure.length}");
+        }
         for (var fiel in value.option_liste) {
           if (fiel.filiere_id == widget.filiere.id) {
             thisOptiont.add(fiel);
           }
         }
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            scrolledUnderElevation: 10,
+          ),
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -71,10 +94,69 @@ class _FiliereInfoState extends State<FiliereInfo> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const CText(
-                      "Options",
-                      size: 20,
-                      weight: FontWeight.w600,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (!onOption) {
+                                    onOption = true;
+                                  }
+                                });
+                              },
+                              child: const CText(
+                                "Options",
+                                size: 20,
+                                weight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            (onOption)
+                                ? Container(
+                                    height: 2,
+                                    width: 80,
+                                    color: Colors.black,
+                                  )
+                                : Container()
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (onOption) {
+                                    onOption = false;
+                                  }
+                                });
+                              },
+                              child: const CText(
+                                "Structures",
+                                size: 20,
+                                weight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            (!onOption)
+                                ? Container(
+                                    height: 2,
+                                    width: 80,
+                                    color: Colors.black,
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     Container(
                       padding: const EdgeInsets.all(10),
@@ -96,7 +178,9 @@ class _FiliereInfoState extends State<FiliereInfo> {
                               physics: const BouncingScrollPhysics(
                                   parent: NeverScrollableScrollPhysics()),
                               itemBuilder: (context, i) {
-                                var op = thisOptiont[i];
+                                var op = (onOption)
+                                    ? thisOptiont[i]
+                                    : thStructure[i];
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.push(context,
@@ -104,24 +188,29 @@ class _FiliereInfoState extends State<FiliereInfo> {
                                       return OptionScreen(option: op);
                                     }));
                                   },
-                                  child: Card(
-                                    child: Row(
-                                      children: [
-                                        Image.network(
-                                          op.image!,
-                                          width: 90,
-                                          //height: 60,
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Flexible(
-                                          child: CText(
-                                            op.denomination,
-                                            weight: FontWeight.w600,
+                                  child: SizedBox(
+                                    child: Card(
+                                      child: Row(
+                                        children: [
+                                          Image.network(
+                                            (onOption) ? op.image! : op.logo!,
+                                            width: 90,
+                                            height: 70,
+                                            fit: BoxFit.cover,
                                           ),
-                                        )
-                                      ],
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Flexible(
+                                            child: CText(
+                                              (onOption)
+                                                  ? op.denomination
+                                                  : op.nom,
+                                              weight: FontWeight.w600,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
@@ -131,7 +220,9 @@ class _FiliereInfoState extends State<FiliereInfo> {
                                   height: 2,
                                 );
                               },
-                              itemCount: thisOptiont.length),
+                              itemCount: (onOption)
+                                  ? thisOptiont.length
+                                  : thStructure.length),
                     ),
                     const SizedBox(
                       height: 15,
