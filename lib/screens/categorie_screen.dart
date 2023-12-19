@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gde/models/Structure.dart';
 import 'package:gde/models/filiere.dart';
 import 'package:gde/screens/detail_page.dart';
+import 'package:gde/screens/filiere_info_screen.dart';
+import 'package:gde/screens/structure_home_screen.dart';
 import 'package:gde/services/data_provider.dart';
 import 'package:gde/widgets/custom_textfield.dart';
 import 'package:gde/widgets/mytext.dart';
@@ -16,6 +19,13 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryState extends State<CategoryScreen> {
   bool isExpanded = false;
   late DataProvider provider;
+  Structure str = Structure(
+      structure_id: 1,
+      nom: "nom",
+      description: "description",
+      logo: "logo",
+      localisation: "localisation",
+      typeStructure: "typeStructure");
 
   @override
   void initState() {
@@ -53,27 +63,41 @@ class _CategoryState extends State<CategoryScreen> {
                       prefix: true,
                     ),
                   ),
-                  FutureBuilder(
-                    future: provider.getFiliere(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return const Center(child: CText("Erreur"));
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return const Column(
+                  // FutureBuilder(
+                  //   future: provider.getFiliere(),
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.hasError) {
+                  //       return const Center(child: CText("Erreur"));
+                  //     } else if (snapshot.connectionState ==
+                  //         ConnectionState.waiting) {
+                  (value.field.isEmpty)
+                      ? const Column(
                           children: [
                             SizedBox(
                               height: 30,
                             ),
                             CircularProgressIndicator(),
                           ],
-                        );
-                      } else {
-                        return Column(
+                        )
+                      :
+                      // } else {
+                      Column(
                           children: [
                             BoxComponents3(
+                                onTap1: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return StrucutureHome(str: str);
+                                  }));
+                                },
+                                onTap2: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return StrucutureHome(str: str);
+                                  }));
+                                },
                                 c: context,
-                                filiere: [],
+                                // filiere: [],
                                 isLink: false,
                                 color: Colors.blueGrey,
                                 name0: 'USTTB',
@@ -85,6 +109,18 @@ class _CategoryState extends State<CategoryScreen> {
                               height: 8,
                             ),
                             BoxComponents3(
+                                onTap1: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return StrucutureHome(str: str);
+                                  }));
+                                },
+                                onTap2: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return StrucutureHome(str: str);
+                                  }));
+                                },
                                 c: context,
                                 isLink: false,
                                 color: Colors.blueGrey,
@@ -112,6 +148,18 @@ class _CategoryState extends State<CategoryScreen> {
                               height: 8,
                             ),
                             BoxComponents3(
+                                onTap1: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return FiliereInfo(filiere: filiere[0]);
+                                  }));
+                                },
+                                onTap2: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return FiliereInfo(filiere: filiere[1]);
+                                  }));
+                                },
                                 c: context,
                                 filiere: value.field,
                                 isLink: true,
@@ -122,10 +170,10 @@ class _CategoryState extends State<CategoryScreen> {
                                 image1: filiere[1].image!,
                                 title: 'Filieres'),
                           ],
-                        );
-                      }
-                    },
-                  )
+                        )
+                  // }
+                  //  },
+                  // )
                 ],
               ),
             ),
@@ -142,13 +190,15 @@ class UBoxe extends StatelessWidget {
   final bool isLink;
   final bool isIn;
   final bool big;
-  const UBoxe(
+  void Function()? onTap;
+  UBoxe(
       {super.key,
       required this.name,
       required this.isLink,
       required this.image,
       required this.isIn,
-      required this.big});
+      required this.big,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -158,37 +208,42 @@ class UBoxe extends StatelessWidget {
     double hi = height / 3.5;
     double bi_wi = width / 1.5;
     double big_hi = height / 4.7;
-
-    return Column(
-      children: [
-        SizedBox(
-          height: big ? big_hi : hi / 3,
-          width: big ? bi_wi : wi / 2.5,
-          child: Card(
-            elevation: 5,
-            shadowColor: Colors.black,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: !isLink
-                    ? Image.asset(
-                        image,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.network(
-                        image,
-                        fit: BoxFit.cover,
-                      )),
+    // Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //           return to_page;
+    //         }));
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          SizedBox(
+            height: big ? big_hi : hi / 2.5,
+            width: big ? bi_wi : wi / 2.5,
+            child: Card(
+              elevation: 5,
+              shadowColor: Colors.black,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: !isLink
+                      ? Image.asset(
+                          image,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        )),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 4,
-        ),
-        CText(
-          name,
-          size: 19,
-          color: Colors.white,
-        )
-      ],
+          const SizedBox(
+            height: 4,
+          ),
+          CText(
+            name,
+            size: 19,
+            color: Colors.white,
+          )
+        ],
+      ),
     );
   }
 }
@@ -201,14 +256,19 @@ class BoxComponents3 extends StatefulWidget {
   final String title;
   final bool isLink;
   final Color color;
+  void Function()? onTap1;
+  void Function()? onTap2;
+
   final BuildContext c;
   final List<Filiere>? filiere;
 
-  const BoxComponents3({
+  BoxComponents3({
     Key? key,
     required this.isLink,
     required this.c,
     this.filiere,
+    this.onTap1,
+    this.onTap2,
     required this.color,
     required this.name0,
     required this.image0,
@@ -224,7 +284,13 @@ class BoxComponents3 extends StatefulWidget {
 class _BoxComponentsState3 extends State<BoxComponents3> {
   bool isLastPage = false;
   bool isExpanded = false;
-
+  Structure str = Structure(
+      structure_id: 3,
+      nom: "nom",
+      description: "description",
+      logo: "logo",
+      localisation: "localisation",
+      typeStructure: "typeStructure");
   late PageController _pageController;
   late int currentPage;
   @override
@@ -283,12 +349,13 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
             ],
           ),
           AnimatedCrossFade(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 600),
             firstChild: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   UBoxe(
+                    onTap: widget.onTap1,
                     isIn: false,
                     big: false,
                     isLink: widget.isLink,
@@ -296,6 +363,7 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                     image: widget.image0,
                   ),
                   UBoxe(
+                    onTap: widget.onTap2,
                     big: false,
                     isIn: false,
                     isLink: widget.isLink,
@@ -309,7 +377,7 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                 ? Stack(
                     children: [
                       Container(
-                        height: 630,
+                        height: 690,
                         child: PageView.builder(
                             onPageChanged: (value) {
                               setState(() {
@@ -317,11 +385,11 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                               });
                             },
                             controller: _pageController,
-                            itemCount: (widget.filiere!.length / 2).ceil(),
+                            itemCount: (widget.filiere!.length / 3).ceil(),
                             itemBuilder: (context, i) {
-                              var fi = widget.filiere![i];
-                              int startIndex = i * 2;
-                              int endIndex = (i + 1) * 2;
+                              //var fi = widget.filiere![i];
+                              int startIndex = i * 3;
+                              int endIndex = (i + 1) * 3;
                               endIndex = endIndex > widget.filiere!.length
                                   ? widget.filiere!.length
                                   : endIndex;
@@ -334,7 +402,7 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                                   Container(
                                     padding: const EdgeInsets.all(2.0),
                                     margin: const EdgeInsets.only(bottom: 5),
-                                    child: InkWell(
+                                    child: UBoxe(
                                       onTap: () {
                                         showModalBottomSheet(
                                             context: context,
@@ -342,13 +410,11 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                                             builder: (context) =>
                                                 DetailPage(filiere: fil));
                                       },
-                                      child: UBoxe(
-                                        big: true,
-                                        isIn: true,
-                                        isLink: true,
-                                        name: fil.nom,
-                                        image: fil.image!,
-                                      ),
+                                      big: true,
+                                      isIn: true,
+                                      isLink: true,
+                                      name: fil.nom,
+                                      image: fil.image!,
                                     ),
                                   ),
                               ]);
@@ -402,11 +468,23 @@ class _BoxComponentsState3 extends State<BoxComponents3> {
                         UBoxe(
                           big: true,
                           isIn: true,
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return StrucutureHome(str: str);
+                            }));
+                          },
                           isLink: widget.isLink,
                           name: widget.name0,
                           image: widget.image0,
                         ),
                         UBoxe(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return StrucutureHome(str: str);
+                            }));
+                          },
                           big: true,
                           isIn: true,
                           isLink: widget.isLink,
